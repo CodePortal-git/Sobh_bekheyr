@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>صبح بخیر</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sky1:#34429a; --sky2:#d9789a; --sky3:#ffc78a;
+  --sun:#ffe08a; --hill1:#2a2f6b; --hill2:#1d2152;
+  --ink:#1f2340; --paper:#fff8ee; --card:#ffffff; --muted:#5b5f80; --accent:#e8603c; --line:#eadfce;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --sky1:#141a45; --sky2:#6a3f7a; --sky3:#c87a68;
+    --sun:#f7cf75; --hill1:#14173d; --hill2:#0c0e28;
+    --ink:#eceaf7; --paper:#0f1130; --card:#191c46; --muted:#a9acd0; --accent:#ff8a63; --line:#2c3068;
+  }
+}
+:root[data-theme="dark"]{
+  --sky1:#141a45; --sky2:#6a3f7a; --sky3:#c87a68;
+  --sun:#f7cf75; --hill1:#14173d; --hill2:#0c0e28;
+  --ink:#eceaf7; --paper:#0f1130; --card:#191c46; --muted:#a9acd0; --accent:#ff8a63; --line:#2c3068;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Vazirmatn",Tahoma,"Segoe UI",sans-serif;line-height:1.9}
+.hero{position:relative;min-height:100svh;overflow:hidden;display:flex;flex-direction:column;align-items:center;
+  background:linear-gradient(to bottom,var(--sky1) 0%,var(--sky2) 55%,var(--sky3) 100%);padding:14vh 1.25rem 0}
+h1{margin:0;font-weight:800;font-size:clamp(3.6rem,17vw,9.5rem);line-height:1.1;color:#fff;letter-spacing:-.02em;text-align:center;
+  position:relative;z-index:3;text-shadow:0 2px 30px rgba(20,20,60,.35);animation:fade 1.6s .9s both ease-out}
+.sub{position:relative;z-index:3;color:#fff;opacity:.92;font-weight:300;font-size:clamp(1rem,3.6vw,1.35rem);margin:.4rem 0 0;text-align:center;animation:fade 1.6s 1.4s both ease-out}
+.sun{position:absolute;bottom:22%;left:50%;width:min(46vw,260px);aspect-ratio:1;margin-left:calc(min(46vw,260px) / -2);border-radius:50%;
+  background:radial-gradient(circle at 50% 50%,var(--sun) 55%,rgba(255,224,138,.0) 72%);box-shadow:0 0 120px 40px rgba(255,214,130,.45);
+  z-index:1;animation:rise 4.5s cubic-bezier(.2,.7,.2,1) both}
+.hills{position:absolute;inset:auto 0 0 0;height:34%;z-index:2}
+.hills svg{width:100%;height:100%;display:block}
+.cue{position:absolute;bottom:calc(1.2rem + env(safe-area-inset-bottom,0px));left:0;right:0;text-align:center;color:#fff;opacity:.8;font-size:.9rem;z-index:4}
+@keyframes rise{from{transform:translateY(70%);opacity:.2}to{transform:none;opacity:1}}
+@keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+main{max-width:640px;margin:0 auto;padding:3rem 1.25rem 4rem}
+.clock{text-align:center}
+.time{font-size:clamp(3rem,14vw,5rem);font-weight:300;margin:0;line-height:1.2;font-variant-numeric:tabular-nums}
+.date{margin:0;color:var(--muted)}
+.greet{margin:1.2rem 0 0;font-size:1.15rem;text-align:center}
+section{margin-top:2.6rem}
+h2{font-size:1.25rem;margin:0 0 .8rem;font-weight:800}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.2rem 1.3rem}
+.phrase{font-size:1.2rem;min-height:3.6em;margin:0 0 1rem}
+button{font:inherit;cursor:pointer;border:0;border-radius:999px;background:var(--accent);color:#fff;padding:.6rem 1.4rem;font-weight:500}
+button:hover,.more:hover{filter:brightness(1.07)}
+.more{display:inline-block;text-decoration:none;border-radius:999px;background:var(--accent);color:#fff;padding:.7rem 1.6rem;font-weight:500}
+.more-wrap{text-align:center;margin-top:2.6rem}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+ul{list-style:none;margin:0;padding:0}
+li+li{border-top:1px solid var(--line)}
+label{display:flex;align-items:center;gap:.8rem;padding:.75rem 0;cursor:pointer}
+input[type=checkbox]{width:1.35rem;height:1.35rem;accent-color:var(--accent);flex:none}
+input:checked + span{text-decoration:line-through;opacity:.55}
+.done{margin:.9rem 0 0;color:var(--muted);min-height:1.9em}
+footer{text-align:center;color:var(--muted);font-size:.9rem;padding:0 1rem 2.5rem}
+@media (prefers-reduced-motion:reduce){.sun,h1,.sub{animation:none}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <h1>صبح بخیر</h1>
+  <p class="sub" id="sub">آفتاب دوباره بالا اومد، امروز هم یه شروع تازه‌ست.</p>
+  <div class="sun" aria-hidden="true"></div>
+  <div class="hills" aria-hidden="true">
+    <svg viewBox="0 0 800 200" preserveAspectRatio="none">
+      <path d="M0 110 C120 60 220 90 330 70 S560 40 680 80 S780 90 800 80 V200 H0Z" fill="#3a3f85" opacity=".75"/>
+      <path d="M0 150 C100 110 230 150 360 125 S600 100 800 140 V200 H0Z" fill="var(--hill1)"/>
+      <path d="M0 180 C150 150 300 190 450 165 S700 150 800 175 V200 H0Z" fill="var(--hill2)"/>
+    </svg>
+  </div>
+  <div class="cue">بیا پایین</div>
+</header>
+
+<main>
+  <div class="clock">
+    <p class="time" id="time" aria-live="off">--:--</p>
+    <p class="date" id="date"></p>
+  </div>
+  <p class="greet" id="greet"></p>
+
+  <section>
+    <h2>یه جمله برای امروز</h2>
+    <div class="card">
+      <p class="phrase" id="phrase">یه نفس عمیق بکش. امروز لازم نیست همه‌چیز کامل باشه.</p>
+      <button type="button" id="next">جملهٔ بعدی</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>سه کار کوچیک برای شروع</h2>
+    <div class="card">
+      <ul id="tasks">
+        <li><label><input type="checkbox" data-k="water"><span>یه لیوان آب بخور</span></label></li>
+        <li><label><input type="checkbox" data-k="window"><span>پنجره رو باز کن و چند نفس هوای تازه بگیر</span></label></li>
+        <li><label><input type="checkbox" data-k="one"><span>مهم‌ترین کار امروز رو تو ذهنت مشخص کن</span></label></li>
+      </ul>
+      <p class="done" id="done"></p>
+    </div>
+  </section>
+
+  <div class="more-wrap">
+    <a class="more" href="https://codeportal-git.github.io/link-manager" target="_blank" rel="noopener noreferrer">سایت‌های بیشتر در: CodePortal 🌐 </a>
+  </div>
+</main>
+<footer>روزت پر از چیزای خوب. ☀<br>   ساخته شده با 💙 توسط: کد پرتال • CodePortal </footer>
+
+<script>
+(function(){
+  var fa = function(o){ return new Intl.DateTimeFormat('fa-IR', o); };
+  var tf = fa({hour:'2-digit',minute:'2-digit',hour12:false});
+  var df = new Intl.DateTimeFormat('fa-IR-u-ca-persian',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  function greetFor(h){
+    if(h<5) return ['هنوز شبه، ولی صبح نزدیکه.','اگه بیداری، یه چای گرم بد نیست.'];
+    if(h<12) return ['صبح بخیر!','بهترین وقت برای شروع یه کار خوبه.'];
+    if(h<17) return ['ظهرت بخیر!','هنوز وقت داری امروز رو خوب کنی.'];
+    if(h<21) return ['عصرت بخیر!','فردا صبح دوباره آفتاب میاد.'];
+    return ['شبت بخیر!','فردا صبح اینجا منتظرتم.'];
+  }
+  function tick(){
+    var d = new Date();
+    document.getElementById('time').textContent = tf.format(d);
+    document.getElementById('date').textContent = df.format(d);
+    var g = greetFor(d.getHours());
+    document.getElementById('greet').textContent = g[0] + ' ' + g[1];
+  }
+  tick(); setInterval(tick, 20000);
+
+  var phrases = [
+    'یه نفس عمیق بکش. امروز لازم نیست همه‌چیز کامل باشه.',
+    'قدم‌های کوچیک هم تو مسیرن. از اولین قدم شروع کن.',
+    'امروز یه نفر رو با یه سلام ساده خوشحال کن.',
+    'اگه دیروز سخت بود، امروز صفحهٔ تازه‌ایه.',
+    'اول یه کار رو تموم کن، بعد سراغ بقیه برو.',
+    'به خودت مهربون باش؛ داری تموم تلاشت رو می‌کنی.',
+    'یه لبخند هم صبح رو بهتر می‌کنه، هم تو رو.'
+  ];
+  var i = 0, p = document.getElementById('phrase');
+  document.getElementById('next').addEventListener('click', function(){
+    i = (i + 1) % phrases.length; p.textContent = phrases[i];
+  });
+
+  var boxes = document.querySelectorAll('#tasks input'), done = document.getElementById('done');
+  var today = new Date().toDateString(), state = {};
+  try{
+    var s = JSON.parse(localStorage.getItem('sobh-tasks') || '{}');
+    if(s.day === today) state = s.v || {};
+  }catch(e){}
+  function update(){
+    var n = 0; boxes.forEach(function(b){ if(b.checked) n++; });
+    done.textContent = n === 3 ? 'آفرین! شروع عالی‌ای داشتی. ☀' : (n ? 'خوبه، ادامه بده.' : '');
+  }
+  boxes.forEach(function(b){
+    b.checked = !!state[b.dataset.k];
+    b.addEventListener('change', function(){
+      state[b.dataset.k] = b.checked;
+      try{ localStorage.setItem('sobh-tasks', JSON.stringify({day:today, v:state})); }catch(e){}
+      update();
+    });
+  });
+  update();
+})();
+</script>
+</body>
+</html>
